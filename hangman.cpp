@@ -2,12 +2,17 @@
 using namespace std;
 
 int main() {
-    // string hangmanPics[] = {
-    //     "0. line 1\n"
-    //     "0. line 2\n",
-    //     "1. line 1\n"
-    //     "1. line 2\n"
-    // };
+    string gameTitle =
+      " _    _\n"                                         
+      "| |  | |\n"                                        
+      "| |__| | __ _ _ __   __ _ _ __ ___   __ _ _ __\n"  
+      "|  __  |/ _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\\n" 
+      "| |  | | (_| | | | | (_| | | | | | | (_| | | | | \n"
+      "|_|  |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_| \n"
+      "                     __/ | \n"                      
+      "                    |___/  \n";
+
+
     string hangmanLife[] = {
         "_________\n"
         "|/      |\n"
@@ -72,6 +77,8 @@ int main() {
         "|         \n"
         "|         \n"
     };
+
+    cout << gameTitle;
 
     for (int i = 0; i < 7; i++) {
         cout << hangmanLife[i];
