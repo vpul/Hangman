@@ -1,18 +1,19 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    string gameTitle =
-      " _    _\n"                                         
-      "| |  | |\n"                                        
-      "| |__| | __ _ _ __   __ _ _ __ ___   __ _ _ __\n"  
-      "|  __  |/ _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\\n" 
-      "| |  | | (_| | | | | (_| | | | | | | (_| | | | | \n"
-      "|_|  |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_| \n"
-      "                     __/ | \n"                      
-      "                    |___/  \n";
+void generateGameTitle() {
+    cout <<
+        " _    _\n"
+        "| |  | |\n"
+        "| |__| | __ _ _ __   __ _ _ __ ___   __ _ _ __\n"
+        "|  __  |/ _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\\n"
+        "| |  | | (_| | | | | (_| | | | | | | (_| | | | | \n"
+        "|_|  |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_| \n"
+        "                     __/ | \n"
+        "                    |___/  \n";
+}
 
-
+void hangmanArt() {
     string hangmanLife[] = {
         "_________\n"
         "|/      |\n"
@@ -75,14 +76,20 @@ int main() {
         "|       | \n"
         "|      / \\\n"
         "|         \n"
-        "|         \n"
-    };
+        "|         \n"};
+}
 
-    cout << gameTitle;
+int main() {
 
-    for (int i = 0; i < 7; i++) {
-        cout << hangmanLife[i];
-    }
+    generateGameTitle();
+
+    // for (int i = 0; i < 7; i++) {
+    //     cout << hangmanLife[i];
+    // }
+
+    char pressedKey;
+    cin << pressedKey; 
+
 
     return 0;
 }
