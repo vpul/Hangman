@@ -13,8 +13,8 @@ void generateGameTitle() {
         "                    |___/  \n";
 }
 
-void hangmanArt() {
-    string hangmanLife[] = {
+void hangmanLife(int n) {
+    string hangmanArt[] = {
         "_________\n"
         "|/      |\n"
         "|        \n"
@@ -76,20 +76,31 @@ void hangmanArt() {
         "|       | \n"
         "|      / \\\n"
         "|         \n"
-        "|         \n"};
+        "|         \n"
+    };
+    cout << hangmanArt[n];
+}
+
+void clrscr() {
+    cout << "\033[2J\033[1;1H";
 }
 
 int main() {
-
     generateGameTitle();
 
-    // for (int i = 0; i < 7; i++) {
-    //     cout << hangmanLife[i];
-    // }
 
-    char pressedKey;
-    cin << pressedKey; 
+    char guessedChar = 'x';
 
+    string testWord = "abacus";
+
+    int n = 0;
+    while((int)guessedChar != 27) {
+        clrscr();
+        generateGameTitle();
+        hangmanLife(n);
+        cin >> guessedChar;
+        n++;
+    }
 
     return 0;
 }
