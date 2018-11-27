@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 void generateGameTitle() {
@@ -85,22 +86,34 @@ void clrscr() {
     cout << "\033[2J\033[1;1H";
 }
 
+void generateWord(string secretWord) {
+    int wordLength = secretWord.length();
+    cout<<"\nSecret Word: ";
+    for (int i = 0; i < wordLength; i++) {
+        cout << "_ ";
+    }
+    cout<<"\n";
+}
+
 int main() {
-    generateGameTitle();
-
-
     char guessedChar = 'x';
 
     string testWord = "abacus";
 
     int n = 0;
-    while((int)guessedChar != 27) {
+    do {
         clrscr();
         generateGameTitle();
         hangmanLife(n);
+        generateWord(testWord);
+        if (n >= 6) {
+            break;
+        }
+        cout << "\nEnter a character: ";
         cin >> guessedChar;
         n++;
-    }
+    } while((int)guessedChar != 27);
 
+    cout << "\nYou lost the game. Better luck next time.";
     return 0;
 }
