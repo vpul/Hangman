@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 void generateGameTitle() {
@@ -86,6 +87,8 @@ void clrscr() {
     cout << "\033[2J\033[1;1H";
 }
 
+vector<string> correctChars;
+
 void generateWord(string secretWord) {
     int wordLength = secretWord.length();
     cout<<"\nSecret Word: ";
@@ -95,25 +98,35 @@ void generateWord(string secretWord) {
     cout<<"\n";
 }
 
+void 
+
 int main() {
     char guessedChar = 'x';
 
     string testWord = "abacus";
 
-    int n = 0;
+    int life = 0;
     do {
         clrscr();
         generateGameTitle();
-        hangmanLife(n);
+        hangmanLife(life);
         generateWord(testWord);
-        if (n >= 6) {
+        if (life >= 6) {
             break;
         }
         cout << "\nEnter a character: ";
         cin >> guessedChar;
-        n++;
+        if(checkForPresence(guessedChar)) {
+            correctChars.push_back(guessedChar);
+        } else {
+            life++;
+        };
     } while((int)guessedChar != 27);
 
     cout << "\nYou lost the game. Better luck next time.";
     return 0;
 }
+
+
+//TODO Create check for presence()
+//Possibly combint above function and generateWord()
