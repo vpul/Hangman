@@ -139,9 +139,9 @@ int main() {
     do {
         clrscr();
         generateGameTitle();
-        hangmanLife(life);
         generateWord(testWord, guessedChar);
         printMisses();
+        hangmanLife(life);
         if (life >= 6) {
             break;
         }
