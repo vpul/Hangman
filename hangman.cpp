@@ -88,6 +88,16 @@ void clrscr() {
 }
 
 vector<char> correctChars;
+vector<char> misses;
+
+void printMisses() {
+    cout << "Misses: ";
+    for (int i = 0; i < misses.size(); i++) {
+        cout << misses[i] << " ";
+    }
+    cout << "\n";
+}
+
 
 int life = 0;
 
@@ -112,8 +122,9 @@ void generateWord(string secretWord, char guessedChar) {
             }
         } 
     }
-    cout<<"\n";
+    cout<<"\n\n";
     if (counter == 0  && guessedChar != ' ') {
+        misses.push_back(guessedChar);
         life++;
     } else {
         correctChars.push_back(guessedChar);
@@ -124,24 +135,18 @@ int main() {
     char guessedChar = ' ';
 
     string testWord = "abacus";
-
-
     
     do {
         clrscr();
         generateGameTitle();
         hangmanLife(life);
         generateWord(testWord, guessedChar);
+        printMisses();
         if (life >= 6) {
             break;
         }
-        cout << "\nEnter a character: ";
+        cout << "\nPick a letter: ";
         cin >> guessedChar;
-        // if(checkForPresence(guessedChar)) {
-        //     correctChars.push_back(guessedChar);
-        // } else {
-            
-        // };
     } while((int)guessedChar != 27);
 
     cout << "\nYou lost the game. Better luck next time.";
@@ -149,5 +154,5 @@ int main() {
 }
 
 
-//TODO Create check for presence()
-//Possibly combint above function and generateWord()
+//Check if game finished
+//Avoid repetation of misses
