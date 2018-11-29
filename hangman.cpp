@@ -87,40 +87,61 @@ void clrscr() {
     cout << "\033[2J\033[1;1H";
 }
 
-vector<string> correctChars;
+vector<char> correctChars;
 
-void generateWord(string secretWord) {
-    int wordLength = secretWord.length();
+int life = 0;
+
+void generateWord(string secretWord, char guessedChar) {
     cout<<"\nSecret Word: ";
-    for (int i = 0; i < wordLength; i++) {
-        cout << "_ ";
+    int counter = 0;
+    for (int i = 0; i < secretWord.length(); i++) {
+        if (secretWord[i] == guessedChar) {
+            cout << guessedChar << " ";
+            counter++;
+        } else {
+            int counter2 = 0;
+            for (int j = 0; j < correctChars.size(); j++) {
+                if (secretWord[i] == correctChars[j]) {
+                    cout << correctChars[j] << " ";
+                    counter2++;
+                    break;
+                }
+            }
+            if (counter2 ==0){
+                cout << "_ ";
+            }
+        } 
     }
     cout<<"\n";
+    if (counter == 0  && guessedChar != ' ') {
+        life++;
+    } else {
+        correctChars.push_back(guessedChar);
+    }
 }
 
-void 
-
 int main() {
-    char guessedChar = 'x';
+    char guessedChar = ' ';
 
     string testWord = "abacus";
 
-    int life = 0;
+
+    
     do {
         clrscr();
         generateGameTitle();
         hangmanLife(life);
-        generateWord(testWord);
+        generateWord(testWord, guessedChar);
         if (life >= 6) {
             break;
         }
         cout << "\nEnter a character: ";
         cin >> guessedChar;
-        if(checkForPresence(guessedChar)) {
-            correctChars.push_back(guessedChar);
-        } else {
-            life++;
-        };
+        // if(checkForPresence(guessedChar)) {
+        //     correctChars.push_back(guessedChar);
+        // } else {
+            
+        // };
     } while((int)guessedChar != 27);
 
     cout << "\nYou lost the game. Better luck next time.";
