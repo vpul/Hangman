@@ -134,22 +134,27 @@ void generateWord(string secretWord, char guessedChar) {
 int main() {
     char guessedChar = ' ';
 
-    string testWord = "abacus";
+    string secretWord = "abacus";
     
     do {
         clrscr();
         generateGameTitle();
-        generateWord(testWord, guessedChar);
+        generateWord(secretWord, guessedChar);
         printMisses();
         hangmanLife(life);
         if (life >= 6) {
+            cout << "\nYou lost. Better luck next time.";
+            break;
+        } else if (correctChars.size() == secretWord.length()) {
+            cout << "\n"
+            " __   __        __   __       ___                ___    __        __    /        __                __\n"        
+            "/  ` /  \\ |\\ | / _` |__)  /\\   |  |  | |     /\\   |  | /  \\ |\\ | /__`  /    \\ / /  \\ |  |    |  | /  \\ |\\ |\n"  
+            "\\__, \\__/ | \\| \\__> |  \\ /~~\\  |  \\__/ |___ /~~\\  |  | \\__/ | \\| .__/ .      |  \\__/ \\__/    |/\\| \\__/ | \\|";
             break;
         }
         cout << "\nPick a letter: ";
         cin >> guessedChar;
     } while((int)guessedChar != 27);
-
-    cout << "\nYou lost the game. Better luck next time.";
     return 0;
 }
 
