@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include <vector> //For push & pop function
+#include <algorithm>  //For using find() function
 using namespace std;
 
 void generateGameTitle() {
@@ -101,34 +102,38 @@ void printMisses() {
 
 int life = 0;
 
-void generateWord(string secretWord, char guessedChar) {
+int generateWord(string secretWord, char guessedChar) {
+    if (guessedChar == ' ') {
+        return 0;
+    }
+
     cout<<"\nSecret Word: ";
-    int counter = 0;
+    int guessedCharExits = 0;
     for (int i = 0; i < secretWord.length(); i++) {
         if (secretWord[i] == guessedChar) {
             cout << guessedChar << " ";
-            counter++;
+            guessedCharExits = 1;
+        } else if (find(correctChars.begin(), correctChars.end(), secretWord[i]) != correctChars.end()) {
+            cout << secretWord[i] << " ";
         } else {
-            int counter2 = 0;
-            for (int j = 0; j < correctChars.size(); j++) {
-                if (secretWord[i] == correctChars[j]) {
-                    cout << correctChars[j] << " ";
-                    counter2++;
-                    break;
-                }
-            }
-            if (counter2 ==0){
-                cout << "_ ";
-            }
+            cout << "_ ";
         } 
     }
     cout<<"\n\n";
-    if (counter == 0  && guessedChar != ' ') {
+    if (guessedCharExits == 0 && (find(misses.begin(), misses.end(), guessedChar) == misses.end())) {
         misses.push_back(guessedChar);
         life++;
-    } else {
+    } else if (find(correctChars.begin(), correctChars.end(), guessedChar) == correctChars.end()) {
         correctChars.push_back(guessedChar);
     }
+}
+
+void printCorrectChars() {
+    cout << "correctChars:";
+    for (int i = 0; i < correctChars.size(); i++) {
+        cout << correctChars[i] << " ";
+    }
+    cout << "\n";
 }
 
 int main() {
@@ -141,6 +146,7 @@ int main() {
         generateGameTitle();
         generateWord(secretWord, guessedChar);
         printMisses();
+        printCorrectChars();
         hangmanLife(life);
         if (life >= 6) {
             cout << "\nYou lost. Better luck next time.";
@@ -161,3 +167,4 @@ int main() {
 
 //Check if game finished
 //Avoid repetation of misses
+//Fix bug places misses on correctChars
