@@ -101,10 +101,12 @@ void printMisses() {
 
 
 int life = 0;
+int gameWon = 0;
 
 int generateWord(string secretWord, char guessedChar) {  
     cout<<"\nSecret Word: ";
     int guessedCharExits = 0;
+    int noOfUnderscores = 0;
     for (int i = 0; i < secretWord.length(); i++) {
         if (secretWord[i] == guessedChar) {
             cout << guessedChar << " ";
@@ -113,10 +115,14 @@ int generateWord(string secretWord, char guessedChar) {
             cout << secretWord[i] << " ";
         } else {
             cout << "_ ";
+            noOfUnderscores++;
         } 
     }
-
     cout<<"\n\n";
+
+    if(noOfUnderscores == 0) {
+        gameWon = 1;
+    }
 
     if (guessedChar == ' ') {
         return 0;
@@ -155,7 +161,7 @@ int main() {
         if (life >= 6) {
             cout << "\nYou lost. Better luck next time.";
             break;
-        } else if (correctChars.size() == secretWord.length()) {
+        } else if (gameWon == 1) {
             cout << "\n"
             " __   __        __   __       ___                ___    __        __    /        __                __\n"        
             "/  ` /  \\ |\\ | / _` |__)  /\\   |  |  | |     /\\   |  | /  \\ |\\ | /__`  /    \\ / /  \\ |  |    |  | /  \\ |\\ |\n"  
@@ -168,5 +174,9 @@ int main() {
     return 0;
 }
 
-
-//Check if game finished
+//files
+//Catagories
+//Win Compatibility
+//Style "You lost"
+//Change 0 & 1 to boolean
+//Code Cleanup
