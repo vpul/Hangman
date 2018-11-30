@@ -102,11 +102,7 @@ void printMisses() {
 
 int life = 0;
 
-int generateWord(string secretWord, char guessedChar) {
-    if (guessedChar == ' ') {
-        return 0;
-    }
-
+int generateWord(string secretWord, char guessedChar) {  
     cout<<"\nSecret Word: ";
     int guessedCharExits = 0;
     for (int i = 0; i < secretWord.length(); i++) {
@@ -119,10 +115,18 @@ int generateWord(string secretWord, char guessedChar) {
             cout << "_ ";
         } 
     }
+
     cout<<"\n\n";
-    if (guessedCharExits == 0 && (find(misses.begin(), misses.end(), guessedChar) == misses.end())) {
-        misses.push_back(guessedChar);
-        life++;
+
+    if (guessedChar == ' ') {
+        return 0;
+    }
+
+    if (guessedCharExits == 0) {
+        if (find(misses.begin(), misses.end(), guessedChar) == misses.end()) {
+            misses.push_back(guessedChar);
+            life++;
+        }
     } else if (find(correctChars.begin(), correctChars.end(), guessedChar) == correctChars.end()) {
         correctChars.push_back(guessedChar);
     }
@@ -166,5 +170,3 @@ int main() {
 
 
 //Check if game finished
-//Avoid repetation of misses
-//Fix bug places misses on correctChars
