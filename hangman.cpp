@@ -2,6 +2,10 @@
 #include <string>
 #include <vector> //For push & pop function
 #include <algorithm>  //For using find() function
+#include <fstream> //For retriving word from files
+#include <stdlib.h> //For random number
+#include <ctime> //To provide time as random seed
+
 using namespace std;
 
 void generateGameTitle() {
@@ -146,11 +150,31 @@ void printCorrectChars() {
     cout << "\n";
 }
 
+
+string getSecretWord() {
+    string line;
+    vector<string> wordListArray;
+    ifstream wordList("wordlist.txt");
+    if (wordList.is_open()) {
+        int i = 0;
+        while (getline(wordList, line)) {
+            wordListArray.push_back(line);
+            i++;
+        }
+        wordList.close();
+        srand(time(NULL));
+        return wordListArray[rand() % i];
+    } else {
+        cout << "Unable to open file";
+    }
+}
+
+
 int main() {
     char guessedChar = ' ';
 
-    string secretWord = "abacus";
-    
+    string secretWord = getSecretWord();
+
     do {
         clrscr();
         generateGameTitle();
@@ -174,7 +198,6 @@ int main() {
     return 0;
 }
 
-//files
 //Catagories
 //Win Compatibility
 //Style "You lost"
