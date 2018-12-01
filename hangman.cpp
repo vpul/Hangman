@@ -112,14 +112,18 @@ int generateWord(string secretWord, char guessedChar) {
     int guessedCharExits = 0;
     int noOfUnderscores = 0;
     for (int i = 0; i < secretWord.length(); i++) {
-        if (secretWord[i] == guessedChar) {
+        if (secretWord[i] == guessedChar && secretWord[i] != '-') {
             cout << guessedChar << " ";
             guessedCharExits = 1;
         } else if (find(correctChars.begin(), correctChars.end(), secretWord[i]) != correctChars.end()) {
             cout << secretWord[i] << " ";
         } else {
-            cout << "_ ";
-            noOfUnderscores++;
+            if (secretWord[i] == '-') {
+                cout << "- ";
+            } else {
+                cout << "_ ";
+                noOfUnderscores++;
+            }
         } 
     }
     cout<<"\n\n";
@@ -128,7 +132,7 @@ int generateWord(string secretWord, char guessedChar) {
         gameWon = 1;
     }
 
-    if (guessedChar == ' ') {
+    if (guessedChar == ' ' || guessedChar == '-') {
         return 0;
     }
 
@@ -210,6 +214,8 @@ int main() {
 }
 
 //Remove correctChars
+//touppercase
+//handle -
 //Win Compatibility
 //Style "You lost"
 //Change 0 & 1 to boolean
