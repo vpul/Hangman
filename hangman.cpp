@@ -151,10 +151,12 @@ void printCorrectChars() {
 }
 
 
-string getSecretWord() {
+string getSecretWord(int catagory) {
+    string wordlistFiles[] = {"months", "colors", "tech_companies", "automobile_companies"};
+
     string line;
     vector<string> wordListArray;
-    ifstream wordList("wordlist.txt");
+    ifstream wordList(wordlistFiles[catagory-1] + ".txt");
     if (wordList.is_open()) {
         int i = 0;
         while (getline(wordList, line)) {
@@ -172,8 +174,17 @@ string getSecretWord() {
 
 int main() {
     char guessedChar = ' ';
-
-    string secretWord = getSecretWord();
+    generateGameTitle();
+    string catagories[] = {"Months", "Colors", "Tech Comanies", "Automobile Companies"};
+    cout << "Catagories:\n";
+    int catagoriesLength = (sizeof(catagories)/sizeof(catagories[0]));
+    for (int i = 1; i <= catagoriesLength; i++) {
+        cout<< i <<". " << catagories[i-1] << "\n";
+    }
+    cout << "\nChoose a number corresponding to the catagory: ";
+    int catagory;
+    cin >> catagory;
+    string secretWord = getSecretWord(catagory);
 
     do {
         clrscr();
@@ -198,7 +209,7 @@ int main() {
     return 0;
 }
 
-//Catagories
+//Remove correctChars
 //Win Compatibility
 //Style "You lost"
 //Change 0 & 1 to boolean
