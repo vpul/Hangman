@@ -146,17 +146,17 @@ int generateWord(string secretWord, char guessedChar) {
     }
 }
 
-void printCorrectChars() {
-    cout << "correctChars:";
-    for (int i = 0; i < correctChars.size(); i++) {
-        cout << correctChars[i] << " ";
-    }
-    cout << "\n";
-}
+// void printCorrectChars() {
+//     cout << "correctChars:";
+//     for (int i = 0; i < correctChars.size(); i++) {
+//         cout << correctChars[i] << " ";
+//     }
+//     cout << "\n";
+// }
 
 
 string getSecretWord(int catagory) {
-    string wordlistFiles[] = {"months", "colors", "tech_companies", "automobile_companies"};
+    string wordlistFiles[] = {"months", "colors", "tech_companies", "automobile_companies", "countries", "foods", "fruits", "movies", "tv_series", "sports"};
 
     string line;
     vector<string> wordListArray;
@@ -179,7 +179,7 @@ string getSecretWord(int catagory) {
 int main() {
     char guessedChar = ' ';
     generateGameTitle();
-    string catagories[] = {"Months", "Colors", "Tech Comanies", "Automobile Companies"};
+    string catagories[] = {"Months", "Colors", "Tech Comanies", "Automobile Companies", "Countries", "Foods", "Fruits", "Movies", "TV Series", "Sports"};
     cout << "Catagories:\n";
     int catagoriesLength = (sizeof(catagories)/sizeof(catagories[0]));
     for (int i = 1; i <= catagoriesLength; i++) {
@@ -195,28 +195,24 @@ int main() {
         generateGameTitle();
         generateWord(secretWord, guessedChar);
         printMisses();
-        printCorrectChars();
+        //printCorrectChars();
         hangmanLife(life);
         if (life >= 6) {
-            cout << "\nYou lost. Better luck next time.";
+            cout << "\nYou lost. The secret word is " << secretWord << ".\n";
             break;
         } else if (gameWon == 1) {
             cout << "\n"
             " __   __        __   __       ___                ___    __        __    /        __                __\n"        
             "/  ` /  \\ |\\ | / _` |__)  /\\   |  |  | |     /\\   |  | /  \\ |\\ | /__`  /    \\ / /  \\ |  |    |  | /  \\ |\\ |\n"  
-            "\\__, \\__/ | \\| \\__> |  \\ /~~\\  |  \\__/ |___ /~~\\  |  | \\__/ | \\| .__/ .      |  \\__/ \\__/    |/\\| \\__/ | \\|";
+            "\\__, \\__/ | \\| \\__> |  \\ /~~\\  |  \\__/ |___ /~~\\  |  | \\__/ | \\| .__/ .      |  \\__/ \\__/    |/\\| \\__/ | \\|\n";
             break;
         }
         cout << "\nPick a letter: ";
         cin >> guessedChar;
+        guessedChar = tolower(guessedChar);
     } while((int)guessedChar != 27);
     return 0;
 }
 
-//Remove correctChars
-//touppercase
-//handle -
 //Win Compatibility
-//Style "You lost"
-//Change 0 & 1 to boolean
 //Code Cleanup
