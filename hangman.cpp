@@ -89,7 +89,11 @@ void hangmanLife(int n) {
 }
 
 void clrscr() {
-    cout << "\033[2J\033[1;1H";
+    #ifdef _WIN32
+        system("CLS");
+    #else      //for Linux and Mac
+        system("clear");
+    #endif
 }
 
 vector<char> correctChars;
@@ -160,7 +164,9 @@ string getSecretWord(int catagory) {
 
     string line;
     vector<string> wordListArray;
-    ifstream wordList(wordlistFiles[catagory-1] + ".txt");
+    //For C++ 1997 Compiler
+    //ifstream wordList((wordlistFiles[catagory-1] + ".txt").c_str());
+    ifstream wordList(wordlistFiles[catagory - 1] + ".txt");
     if (wordList.is_open()) {
         int i = 0;
         while (getline(wordList, line)) {
@@ -213,6 +219,3 @@ int main() {
     } while((int)guessedChar != 27);
     return 0;
 }
-
-//Win Compatibility
-//Code Cleanup
