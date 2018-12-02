@@ -186,7 +186,8 @@ int main() {
     char guessedChar = ' ';
     generateGameTitle();
     string catagories[] = {"Months", "Colors", "Tech Comanies", "Automobile Companies", "Countries", "Foods", "Fruits", "Movies", "TV Series", "Sports"};
-    cout << "Catagories:\n";
+    cout << "\nCatagories for wordlist:\n";
+    cout << "------------------------\n";
     int catagoriesLength = (sizeof(catagories)/sizeof(catagories[0]));
     for (int i = 1; i <= catagoriesLength; i++) {
         cout<< i <<". " << catagories[i-1] << "\n";
